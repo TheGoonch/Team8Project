@@ -1,4 +1,4 @@
-package com.example.employeereimbuseapp;
+package com.example.employeereimburseapp;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
