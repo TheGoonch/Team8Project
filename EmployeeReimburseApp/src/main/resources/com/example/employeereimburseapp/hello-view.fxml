@@ -3,12 +3,12 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" prefHeight="154.0" stylesheets="@style.css" prefWidth="169.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17.0.12" fx:controller="com.example.employeereimburseapp.HelloController">
+<VBox alignment="CENTER" prefHeight="234.0" prefWidth="324.0" spacing="20.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeereimburseapp.HelloController">
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
-
-  <Label fx:id="welcomeText" />
-  <Button styleClass="helloButton" onAction="#onHelloButtonClick" text="Hello!" />
+   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This is the employee reimbursement app for UNB, it completely replaces the paper based system. It's faster, more convenient, and also more organized. " wrappingWidth="226.13673090934753" VBox.vgrow="ALWAYS" />
+  <Button alignment="BASELINE_LEFT" onAction="#takeMeToLogin" styleClass="helloButton" text="Log In Page" />
 </VBox>
