@@ -32,14 +32,26 @@ public class LoginPageController {
         try(Connection con = CentralDatabase.getConnection();){
             ResultSet rs;
             PreparedStatement ps;
+            ps = con.prepareStatement("SELECT 1 FROM \"UNBEmployee\" WHERE \"emp_id\" = ?");
+            ps.setInt(1, Integer.parseInt(empIDField.getText()));
+            rs = ps.executeQuery();
+            if(!rs.next()){
+                System.out.println("Invalid Id");
+                return;
+            }
 
-
-
-            ps = con.prepareStatement("SELECT * FROM \"User\" WHERE \"user_id\" = ?");
+            ps = con.prepareStatement("SELECT 1 FROM \"User\" WHERE \"user_id\" = ?");
             ps.setInt(1, Integer.parseInt(empIDField.getText()));;
             rs = ps.executeQuery();
             if(rs.next()){
-                FxHelper.nextPage("works-page.fxml",event);
+                ps = con.prepareStatement("SELECT 1 FROM \"User\" WHERE \"password\" = ?");
+                ps.setString(1, passwordField.getText());
+                rs = ps.executeQuery();
+                if(rs.next()){
+                    FxHelper.nextPage("works-page.fxml",event);
+                }else{
+                    System.out.println("Invalid Password");
+                }
             }
 
 
