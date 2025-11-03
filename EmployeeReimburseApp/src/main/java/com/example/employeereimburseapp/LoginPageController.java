@@ -10,26 +10,45 @@ import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class LoginPageController {
 
     @FXML
+    private TextField empIDField;
+
+    @FXML
+    private TextField passwordField;
+
+    @FXML
+    private TextField emailField;
+
+    @FXML
     public void testPress(ActionEvent event) throws IOException {
         try(Connection con = CentralDatabase.getConnection();){
-            String test = "Select * from UNBEmployee";
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM UNBEmployee");
-            ResultSet rs = ps.executeQuery();
+            ResultSet rs;
+            PreparedStatement ps;
 
-            while(rs.next()){
-                int user_id = rs.getInt("emp_id");
-                String name = rs.getString("name");
-                String email = rs.getString("email");
-                String password = rs.getString("password");
-                String role = rs.getString("role");
-                System.out.println(name +  " " + email + " " + password + " " + role);
+
+
+            ps = con.prepareStatement("SELECT * FROM \"User\" WHERE \"user_id\" = ?");
+            ps.setInt(1, Integer.parseInt(empIDField.getText()));;
+            rs = ps.executeQuery();
+            if(rs.next()){
+                FxHelper.nextPage("works-page.fxml",event);
             }
+
+
+            int user_id = rs.getInt("emp_id");
+            String name = rs.getString("name");
+            String email = rs.getString("email");
+            String password = rs.getString("password");
+            String role = rs.getString("role");
+            System.out.println(name +  " " + email + " " + password + " " + role);
 
         }catch(SQLException e){
             System.out.println("LoginPageController Error\n" + e.getMessage());
