@@ -46,7 +46,7 @@ public class LoginPageController {
                 ps.setString(1, passwordField.getText());
                 rs = ps.executeQuery();
                 if(rs.next()){
-                    FxHelper.nextPage("works-page.fxml",event);
+                    FxHelper.nextPage("employeeDashboard-page.fxml",event);
                 }else{
                     System.out.println("Invalid Password");
                 }
@@ -76,7 +76,7 @@ public class LoginPageController {
                     System.out.println("Account Creation Failed");
                 }else{
                     System.out.println("Account Creation Failed");
-                    FxHelper.nextPage("works-page.fxml",event);
+                    FxHelper.nextPage("employeeDashboard-page.fxml",event);
                 }
 
             }
