@@ -3,6 +3,7 @@ module com.example.employeereimburseapp {
     requires javafx.fxml;
     requires java.sql;
     requires javafx.graphics;
+    requires jdk.jfr;
 
 
     opens com.example.employeereimburseapp to javafx.fxml;

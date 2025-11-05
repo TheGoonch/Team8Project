@@ -17,6 +17,10 @@ public class FxHelper {
         newStage.setTitle("Login Window");
         newStage.setScene(scene);
         newStage.show();
+        closeScene(event);
+    }
+
+    public static void closeScene(ActionEvent event) throws IOException{
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
     }

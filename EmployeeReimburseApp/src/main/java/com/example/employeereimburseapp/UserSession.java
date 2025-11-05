@@ -9,10 +9,10 @@ public class UserSession {
     private String role;
 
     private UserSession(int id, String name, String email, String role) {
-        user.id = id;
-        user.name = name;
-        user.email = email;
-        user.role = role;
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.role = role;
     }
 
     public static void createUser(int id, String name, String email, String role) {

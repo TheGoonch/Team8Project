@@ -46,36 +46,28 @@ public class LoginPageController {
                 ps.setString(1, passwordField.getText());
                 rs = ps.executeQuery();
                 if(rs.next()){
+                    createSession(con);
+                    UserSession user = UserSession.getUser();
+                    if(user != null){
+                        System.out.println("Session Creation Failed");
+                        FxHelper.closeScene(event);
+                    }
                     FxHelper.nextPage("employeeDashboard-page.fxml",event);
                 }else{
                     System.out.println("Invalid Password");
                 }
             }else {
-                ps = con.prepareStatement("SELECT * FROM \"UNBEmployee\" WHERE \"emp_id\" = ?");
-                ps.setInt(1, Integer.parseInt(empIDField.getText()));
-
-                rs = ps.executeQuery();
-                rs.next();
-                int empId = rs.getInt("emp_id");
-                String name = rs.getString("name");
-                String email = rs.getString("email");
-                String password = rs.getString("password");
-                String role = rs.getString("role");
-                Date curdate = new Date(System.currentTimeMillis());
-
-                System.out.println(empId+" "+name+" "+email+" "+password+" "+role);
-                ps = con.prepareStatement("INSERT INTO \"User\" (\"user_id\", \"name\", \"email\", \"role\", \"date_create\", \"password\") VALUES (?,?,?,?,?,?)");
-                ps.setInt(1, empId);
-                ps.setString(2, name);
-                ps.setString(3, email);
-                ps.setString(4, role);
-                ps.setDate(5, curdate);
-                ps.setString(6, password);
-                int rows = ps.executeUpdate();
+                int rows = createNewUser(con);
                 if(rows < 0){
                     System.out.println("Account Creation Failed");
                 }else{
-                    System.out.println("Account Creation Failed");
+                    System.out.println("Account Creation Success");
+                    createSession(con);
+                    UserSession user = UserSession.getUser();
+                    if(user != null){
+                        System.out.println("Session Creation Failed");
+                        FxHelper.closeScene(event);
+                    }
                     FxHelper.nextPage("employeeDashboard-page.fxml",event);
                 }
 
@@ -84,6 +76,53 @@ public class LoginPageController {
             System.out.println("LoginPageController Error\n" + e.getMessage());
         }
 
+    }
+
+    public int createNewUser(Connection con)  throws IOException{
+        try(PreparedStatement ps = con.prepareStatement("SELECT * FROM \"UNBEmployee\" WHERE \"emp_id\" = ?")){
+            ps.setInt(1, Integer.parseInt(empIDField.getText()));
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int empId = rs.getInt("emp_id");
+            String name = rs.getString("name");
+            String email = rs.getString("email");
+            String password = rs.getString("password");
+            String role = rs.getString("role");
+            Date curdate = new Date(System.currentTimeMillis());
+
+            System.out.println(empId+" "+name+" "+email+" "+password+" "+role);
+            PreparedStatement ins = con.prepareStatement("INSERT INTO \"User\" (\"user_id\", \"name\", \"email\", \"role\", \"date_create\", \"password\") VALUES (?,?,?,?,?,?)");
+            ins.setInt(1, empId);
+            ins.setString(2, name);
+            ins.setString(3, email);
+            ins.setString(4, role);
+            ins.setDate(5, curdate);
+            ins.setString(6, password);
+            int rows = ins.executeUpdate();
+            return rows;
+
+        }catch(SQLException e){
+            System.out.println("LoginPageController Error\n" + e.getMessage());
+        }
+
+        return 0;
+
+    }
+
+    public void createSession(Connection con) throws SQLException{
+        try(PreparedStatement ps = con.prepareStatement("SELECT * FROM \"UNBEmployee\" WHERE \"emp_id\" = ?")){
+            ps.setInt(1, Integer.parseInt(empIDField.getText()));
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int empId = rs.getInt("emp_id");
+            String name = rs.getString("name");
+            String email = rs.getString("email");
+            String role = rs.getString("role");
+            UserSession.createUser(empId, name, email, role);
+            UserSession user = UserSession.getUser();
+        }catch(SQLException e){
+            System.out.println("LoginPageController Error\n" + e.getMessage());
+        }
     }
 
 }
