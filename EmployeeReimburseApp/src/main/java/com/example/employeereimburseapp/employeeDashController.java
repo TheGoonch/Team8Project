@@ -45,7 +45,7 @@ public class employeeDashController {
     public void initialize() {
         UserSession user = UserSession.getUser();
         assert user != null;
-        welcomeLbl.setText("Welcome! " + user.getName());
+        welcomeLbl.setText("Welcome! " + user.getName() + " Employee Dashboard");
         try {
             loadAllRequests();
         } catch (SQLException e) {
@@ -59,7 +59,7 @@ public class employeeDashController {
         try(Connection con = CentralDatabase.getConnection()){
             UserSession user = UserSession.getUser();
             PreparedStatement ps = con.prepareStatement("INSERT INTO \"Request\" (\"user_id\", \"location\", \"expense_type\", " +
-                    "\"cost\", \"reason\", \"reciept_url\", \"status\", \"date_submitted\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    "\"cost\", \"reason\", \"reciept_url\", \"status\", \"date_submitted\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             assert user != null;
             String status = "Pending";
             double cost = Double.parseDouble(costField.getText());
@@ -77,17 +77,21 @@ public class employeeDashController {
             if(rows < 0){
                 System.out.println("Request Creation Failed");
             }else{
+                ResultSet rs = ps.getGeneratedKeys();
+                rs.next();
+                int userId = rs.getInt(1);
                 locField.clear();
                 expenseField.clear();
                 costField.clear();
                 reasonField.clear();
                 recieptField.clear();
                 System.out.println("Request Creation Success");
+                addReqCard(userId, loc, cost, status);
             }
 
 
 
-        }catch(SQLException e){
+        }catch(SQLException | IOException e){
             System.out.println("employeeDashController Error\n" + e.getMessage());
         }
     }

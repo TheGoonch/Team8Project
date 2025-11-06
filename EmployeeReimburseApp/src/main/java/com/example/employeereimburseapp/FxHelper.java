@@ -14,7 +14,7 @@ public class FxHelper {
         FXMLLoader fxmlLoader = new FXMLLoader(FxHelper.class.getResource(sceneName));
         Scene scene = new Scene(fxmlLoader.load());
         Stage newStage = new Stage();
-        newStage.setTitle("Login Window");
+        newStage.setTitle("Employee Reimburse App");
         newStage.setScene(scene);
         newStage.show();
         closeScene(event);

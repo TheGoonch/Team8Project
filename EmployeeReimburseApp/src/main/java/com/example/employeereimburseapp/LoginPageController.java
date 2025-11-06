@@ -24,41 +24,49 @@ public class LoginPageController {
         try(Connection con = CentralDatabase.getConnection()){
             ResultSet rs;
             PreparedStatement ps;
-            ps = con.prepareStatement("SELECT 1 FROM \"UNBEmployee\" WHERE \"emp_id\" = ?");
+            ps = con.prepareStatement("SELECT * FROM \"UNBEmployee\" WHERE \"emp_id\" = ?");
             ps.setInt(1, Integer.parseInt(empIDField.getText()));
             rs = ps.executeQuery();
             if(!rs.next()){
-                System.out.println("Invalid Id");
+                System.out.println("No such user in UNB database exists");
                 return;
             }
+
+            int idDat = rs.getInt("emp_id");
+            String email = rs.getString("email");
+            String password = rs.getString("password");
+            String role = rs.getString("role");
 
             ps = con.prepareStatement("SELECT 1 FROM \"User\" WHERE \"user_id\" = ?");
             ps.setInt(1, Integer.parseInt(empIDField.getText()));
             rs = ps.executeQuery();
             if(rs.next()){
-                ps = con.prepareStatement("SELECT 1 FROM \"User\" WHERE \"email\" = ?");
-                ps.setString(1, emailField.getText());
-                rs = ps.executeQuery();
-                if(!rs.next()){
+
+                if(!email.equals(emailField.getText())){
                     System.out.println("Invalid Email");
                     return;
                 }
-                ps = con.prepareStatement("SELECT 1 FROM \"User\" WHERE \"password\" = ?");
-                ps.setString(1, passwordField.getText());
-                rs = ps.executeQuery();
-                if(rs.next()){
+
+                if(password.equals(passwordField.getText())){
                     createSession(con);
                     UserSession user = UserSession.getUser();
                     if(user == null){
                         System.out.println("Session Creation Failed");
                         FxHelper.closeScene(event);
                     }else{
-                        FxHelper.nextPage("employeeDashboard-page.fxml",event);
+
+                        if(role.equals("employee")){
+                            FxHelper.nextPage("employeeDashboard-page.fxml",event);
+                        }else if(role.equals("manager")){
+                            FxHelper.nextPage("managerDashboard-page.fxml",event);
+                        }
+
                     }
 
                 }else{
                     System.out.println("Invalid Password");
                 }
+
             }else {
                 int rows = createNewUser(con);
                 if(rows < 0){
@@ -71,7 +79,13 @@ public class LoginPageController {
                         System.out.println("Session Creation Failed");
                         FxHelper.closeScene(event);
                     }else{
-                        FxHelper.nextPage("employeeDashboard-page.fxml",event);
+
+                        if(role.equals("employee")){
+                            FxHelper.nextPage("employeeDashboard-page.fxml",event);
+                        }else if(role.equals("manager")){
+                            FxHelper.nextPage("managerDashboard-page.fxml",event);
+                        }
+
                     }
 
                 }
