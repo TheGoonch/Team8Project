@@ -1,18 +1,125 @@
 package com.example.employeereimburseapp;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.event.ActionEvent;
+import javafx.scene.control.TextField;
+import java.sql.Connection;
+import javafx.event.ActionEvent;
+import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+import java.sql.*;
+import java.sql.SQLException;
+
 
 public class employeeDashController {
 
     @FXML
     private Label welcomeLbl;
 
+    @FXML
+    private TextField locField;
+
+    @FXML
+    private TextField expenseField;
+
+    @FXML
+    private TextField costField;
+
+    @FXML
+    private TextField reasonField;
+
+    @FXML
+    private TextField recieptField;
+
+    @FXML
+    private Label reqLbl;
+
+    @FXML
+    private VBox reqListVB;
+
+
     public void initialize() {
         UserSession user = UserSession.getUser();
         assert user != null;
         welcomeLbl.setText("Welcome! " + user.getName());
+        try {
+            loadAllRequests();
+        } catch (SQLException e) {
+            System.out.println("employeeDashController Error\n" + e.getMessage());
+        }
 
+    }
+
+    @FXML
+    public void requestCreate(ActionEvent event) throws SQLException{
+        try(Connection con = CentralDatabase.getConnection()){
+            UserSession user = UserSession.getUser();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO \"Request\" (\"user_id\", \"location\", \"expense_type\", " +
+                    "\"cost\", \"reason\", \"reciept_url\", \"status\", \"date_submitted\") VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            assert user != null;
+            String status = "Pending";
+            double cost = Double.parseDouble(costField.getText());
+            String loc = locField.getText();
+            ps.setInt(1, user.getId());
+            ps.setString(2, locField.getText());
+            ps.setString(3, expenseField.getText());
+            ps.setDouble(4, Double.parseDouble(costField.getText()));
+            ps.setString(5, reasonField.getText());
+            ps.setString(6, recieptField.getText());
+            ps.setString(7, status);
+            ps.setTimestamp(8, new Timestamp(System.currentTimeMillis()));
+            int rows = ps.executeUpdate();
+
+            if(rows < 0){
+                System.out.println("Request Creation Failed");
+            }else{
+                locField.clear();
+                expenseField.clear();
+                costField.clear();
+                reasonField.clear();
+                recieptField.clear();
+                System.out.println("Request Creation Success");
+            }
+
+
+
+        }catch(SQLException e){
+            System.out.println("employeeDashController Error\n" + e.getMessage());
+        }
+    }
+
+    public void addReqCard(int reqId, String loc, double cost, String status) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("request-card.fxml"));
+        Node card = loader.load();
+        RequestCardController controller = loader.getController();
+        controller.setData(reqId, loc, cost, status);
+        reqListVB.getChildren().add(card);
+    }
+
+    public void loadAllRequests() throws SQLException{
+        try(Connection con = CentralDatabase.getConnection()){
+            UserSession user = UserSession.getUser();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM \"Request\" WHERE \"user_id\" = ?");
+            assert user != null;
+            ps.setInt(1, user.getId());
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+              int reqId = rs.getInt("req_id");
+              String loc = rs.getString("location");
+              double cost = rs.getDouble("cost");
+              String status = rs.getString("status");
+              addReqCard(reqId, loc, cost, status);
+            }
+
+        }catch (SQLException e){
+            System.out.println("employeeDashController Error\n" + e.getMessage());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

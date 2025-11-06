@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.sql.*;
 import java.sql.SQLException;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class LoginPageController {
@@ -48,11 +49,13 @@ public class LoginPageController {
                 if(rs.next()){
                     createSession(con);
                     UserSession user = UserSession.getUser();
-                    if(user != null){
+                    if(user == null){
                         System.out.println("Session Creation Failed");
                         FxHelper.closeScene(event);
+                    }else{
+                        FxHelper.nextPage("employeeDashboard-page.fxml",event);
                     }
-                    FxHelper.nextPage("employeeDashboard-page.fxml",event);
+
                 }else{
                     System.out.println("Invalid Password");
                 }
@@ -64,11 +67,13 @@ public class LoginPageController {
                     System.out.println("Account Creation Success");
                     createSession(con);
                     UserSession user = UserSession.getUser();
-                    if(user != null){
+                    if(user == null){
                         System.out.println("Session Creation Failed");
                         FxHelper.closeScene(event);
+                    }else{
+                        FxHelper.nextPage("employeeDashboard-page.fxml",event);
                     }
-                    FxHelper.nextPage("employeeDashboard-page.fxml",event);
+
                 }
 
             }
