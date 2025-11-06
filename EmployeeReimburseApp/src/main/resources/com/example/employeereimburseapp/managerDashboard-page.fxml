@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane prefHeight="425.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/17.0.12"
+          xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="com.example.employeereimburseapp.managerDashController">
+
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" prefWidth="134.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" prefWidth="564.0"/>
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints prefHeight="23.6" vgrow="SOMETIMES"/>
+        <RowConstraints prefHeight="377.2" vgrow="SOMETIMES"/>
+    </rowConstraints>
+
+    <children>
+        <!-- LEFT SIDE (Manager Controls) -->
+        <GridPane GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+
+                <!-- Approve / Reject Buttons -->
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Button fx:id="approveBtn" text="Approve Request" prefWidth="122.0" prefHeight="40.0"/>
+                        <Button fx:id="rejectBtn" text="Reject Request" prefWidth="122.0" prefHeight="40.0"/>
+                    </children>
+                    <GridPane.margin>
+                        <Insets top="10.0" left="10.0"/>
+                    </GridPane.margin>
+                </VBox>
+
+                <!-- Filter by Employee -->
+                <VBox GridPane.rowIndex="1" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Text text="Employee Name"/>
+                        <TextField fx:id="employeeFilterField" prefHeight="26.0" prefWidth="181.0"/>
+                    </children>
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </VBox>
+
+                <!-- Filter by Status -->
+                <VBox GridPane.rowIndex="2" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Text text="Status"/>
+                        <TextField fx:id="statusFilterField" promptText="All / Pending / Approved / Rejected"
+                                   prefHeight="26.0" prefWidth="181.0"/>
+                    </children>
+                    <GridPane.margin>
+                        <Insets left="10.0"/>
+                    </GridPane.margin>
+                </VBox>
+
+                <!-- Buttons for filter and refresh -->
+                <VBox GridPane.rowIndex="3" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Button fx:id="filterBtn" text="Apply Filter" prefWidth="122.0" prefHeight="35.0"/>
+                        <Button fx:id="refreshBtn" text="Refresh List" prefWidth="122.0" prefHeight="35.0"/>
+                    </children>
+                    <GridPane.margin>
+                        <Insets left="10.0" top="5.0"/>
+                    </GridPane.margin>
+                </VBox>
+
+                <!-- View Receipt -->
+                <VBox GridPane.rowIndex="4" prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Button fx:id="viewReceiptBtn" text="View Receipt" prefWidth="122.0" prefHeight="35.0"/>
+                    </children>
+                    <GridPane.margin>
+                        <Insets left="10.0" top="5.0"/>
+                    </GridPane.margin>
+                </VBox>
+
+            </children>
+        </GridPane>
+
+        <!-- RIGHT SIDE (Request List) -->
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <content>
+                <VBox fx:id="requestList" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                    <padding>
+                        <Insets top="12.0" right="12.0" bottom="12.0" left="12.0"/>
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+
+        <!-- TABLE HEADER -->
+        <GridPane GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints prefWidth="100.0"/>
+                <ColumnConstraints prefWidth="100.0"/>
+                <ColumnConstraints prefWidth="100.0"/>
+                <ColumnConstraints prefWidth="100.0"/>
+                <ColumnConstraints prefWidth="100.0"/>
+                <ColumnConstraints prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <children>
+                <Label text="Request ID"/>
+                <Label text="Employee" GridPane.columnIndex="1"/>
+                <Label text="Location" GridPane.columnIndex="2"/>
+                <Label text="Cost" GridPane.columnIndex="3"/>
+                <Label text="Reason" GridPane.columnIndex="4"/>
+                <Label text="Status" GridPane.columnIndex="5"/>
+            </children>
+        </GridPane>
+
+        <!-- Dashboard Title -->
+        <Label fx:id="welcomeLbl" text="Manager Dashboard"/>
+    </children>
+</GridPane>
