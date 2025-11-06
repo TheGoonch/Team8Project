@@ -1,4 +1,4 @@
 package com.example.employeereimburseapp;
 
-public class requestCardController {
+public class ManagerDashController {
 }
