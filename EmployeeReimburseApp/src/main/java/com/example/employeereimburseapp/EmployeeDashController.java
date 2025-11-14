@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 import java.sql.Connection;
-import javafx.event.ActionEvent;
+
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.sql.*;
 import java.sql.SQLException;
 
 
-public class employeeDashController {
+public class EmployeeDashController {
 
     @FXML
     private Label welcomeLbl;
