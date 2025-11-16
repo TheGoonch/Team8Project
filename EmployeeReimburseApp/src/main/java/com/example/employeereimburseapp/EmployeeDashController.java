@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.event.ActionEvent;
 import javafx.scene.control.TextField;
 import java.sql.Connection;
 
@@ -15,7 +14,7 @@ import java.sql.*;
 import java.sql.SQLException;
 
 
-public class EmployeeDashController {
+public class EmployeeDashController extends Dashboard{
 
     @FXML
     private Label welcomeLbl;
@@ -36,9 +35,6 @@ public class EmployeeDashController {
     private TextField recieptField;
 
     @FXML
-    private Label reqLbl;
-
-    @FXML
     private VBox reqListVB;
 
 
@@ -55,7 +51,7 @@ public class EmployeeDashController {
     }
 
     @FXML
-    public void requestCreate(ActionEvent event) throws SQLException{
+    public void requestCreate(){
         try(Connection con = CentralDatabase.getConnection()){
             UserSession user = UserSession.getUser();
             PreparedStatement ps = con.prepareStatement("INSERT INTO \"Request\" (\"user_id\", \"location\", \"expense_type\", " +
@@ -97,34 +93,11 @@ public class EmployeeDashController {
     }
 
     public void addReqCard(int reqId, String loc, double cost, String status) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("request-card.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("employee-card.fxml"));
         Node card = loader.load();
-        RequestCardController controller = loader.getController();
+        cardEmployee controller = loader.getController();
         controller.setData(reqId, loc, cost, status);
         reqListVB.getChildren().add(card);
     }
-
-    public void loadAllRequests() throws SQLException{
-        try(Connection con = CentralDatabase.getConnection()){
-            UserSession user = UserSession.getUser();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM \"Request\" WHERE \"user_id\" = ?");
-            assert user != null;
-            ps.setInt(1, user.getId());
-            ResultSet rs = ps.executeQuery();
-            while(rs.next()){
-              int reqId = rs.getInt("req_id");
-              String loc = rs.getString("location");
-              double cost = rs.getDouble("cost");
-              String status = rs.getString("status");
-              addReqCard(reqId, loc, cost, status);
-            }
-
-        }catch (SQLException e){
-            System.out.println("employeeDashController Error\n" + e.getMessage());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
 
 }

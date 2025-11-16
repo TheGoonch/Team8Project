@@ -56,9 +56,11 @@ public class LoginPageController {
                     }else{
 
                         if(role.equals("employee")){
-                            FxHelper.nextPage("employeeDashboard-page.fxml",event);
+                            FxHelper.nextPage("employeeDashboard-page.fxml");
+                            FxHelper.closeScene(event);
                         }else if(role.equals("manager")){
-                            FxHelper.nextPage("managerDashboard-page.fxml",event);
+                            FxHelper.nextPage("managerDashboard-page.fxml");
+                            FxHelper.closeScene(event);
                         }
 
                     }
@@ -81,9 +83,11 @@ public class LoginPageController {
                     }else{
 
                         if(role.equals("employee")){
-                            FxHelper.nextPage("employeeDashboard-page.fxml",event);
+                            FxHelper.nextPage("employeeDashboard-page.fxml");
+                            FxHelper.closeScene(event);
                         }else if(role.equals("manager")){
-                            FxHelper.nextPage("managerDashboard-page.fxml",event);
+                            FxHelper.nextPage("managerDashboard-page.fxml");
+                            FxHelper.closeScene(event);
                         }
 
                     }
