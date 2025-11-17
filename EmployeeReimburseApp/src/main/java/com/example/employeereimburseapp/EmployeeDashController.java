@@ -17,9 +17,6 @@ import java.sql.SQLException;
 public class EmployeeDashController extends Dashboard{
 
     @FXML
-    private Label welcomeLbl;
-
-    @FXML
     private TextField locField;
 
     @FXML
@@ -36,19 +33,6 @@ public class EmployeeDashController extends Dashboard{
 
     @FXML
     private VBox reqListVB;
-
-
-    public void initialize() {
-        UserSession user = UserSession.getUser();
-        assert user != null;
-        welcomeLbl.setText("Welcome! " + user.getName() + " Employee Dashboard");
-        try {
-            loadAllRequests();
-        } catch (SQLException e) {
-            System.out.println("employeeDashController Error\n" + e.getMessage());
-        }
-
-    }
 
     @FXML
     public void requestCreate(){
@@ -95,7 +79,7 @@ public class EmployeeDashController extends Dashboard{
     public void addReqCard(int reqId, String loc, double cost, String status) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("employee-card.fxml"));
         Node card = loader.load();
-        cardEmployee controller = loader.getController();
+        CardEmployee controller = loader.getController();
         controller.setData(reqId, loc, cost, status);
         reqListVB.getChildren().add(card);
     }

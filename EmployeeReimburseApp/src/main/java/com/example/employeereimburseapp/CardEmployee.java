@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class cardEmployee extends RequestCard {
+public class CardEmployee extends RequestCard {
 
     @FXML
     public void moreInfo() {

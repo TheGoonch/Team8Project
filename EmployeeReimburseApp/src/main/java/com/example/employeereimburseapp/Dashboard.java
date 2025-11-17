@@ -13,6 +13,21 @@ import java.sql.SQLException;
 
 public abstract class Dashboard {
 
+    @FXML
+    private Label welcomeLbl;
+
+    public void initialize() {
+        UserSession user = UserSession.getUser();
+        assert user != null;
+        welcomeLbl.setText("Welcome! " + user.getName() );
+        try {
+            loadAllRequests();
+        } catch (SQLException e) {
+            System.out.println("DashBoard Error\n" + e.getMessage());
+        }
+
+    }
+
     public abstract void addReqCard(int reqId, String loc, double cost, String status) throws IOException;
 
     public void loadAllRequests() throws SQLException{
@@ -31,7 +46,7 @@ public abstract class Dashboard {
             }
 
         }catch (SQLException e){
-            System.out.println("employeeDashController Error\n" + e.getMessage());
+            System.out.println("DashBoard Error\n" + e.getMessage());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
