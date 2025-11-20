@@ -1,7 +1,13 @@
 package com.example.employeereimburseapp;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -9,8 +15,21 @@ import java.sql.SQLException;
 public class CardEmployee extends RequestCard {
 
     @FXML
-    public void moreInfo() {
-        System.out.println("More Info");
+    public void moreInfo(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("requestInfo-page.fxml"));
+        Scene scene = new Scene(loader.load());
+        Stage newStage = new Stage();
+
+        requestInfoController requestController = loader.getController();
+        requestController.loadData(getRequestID());
+        newStage.setTitle("Employee Reimburse App");
+        newStage.setScene(scene);
+        newStage.show();
+
+
+
+        FxHelper.closeScene(event);
     }
 
     @FXML
