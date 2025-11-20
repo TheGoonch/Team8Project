@@ -1,14 +1,21 @@
 package testpackage;
 
 import com.example.employeereimburseapp.UserSession;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserSessionTest{
 
+
     @Test
     public void testGetNotCreatedUser(){
         assertNull(UserSession.getUser());
+    }
+
+    @BeforeEach
+    void resetSession() {
+        UserSession.destroyUser();   // <--- IMPORTANT
     }
 
     @Test

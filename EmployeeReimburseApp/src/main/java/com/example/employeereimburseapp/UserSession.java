@@ -27,6 +27,10 @@ public class UserSession {
         }
     }
 
+    public static void destroyUser() {
+        user = null;
+    }
+
     public int getId() {return id;}
     public String getName() {return name;}
     public String getEmail() {return email;}

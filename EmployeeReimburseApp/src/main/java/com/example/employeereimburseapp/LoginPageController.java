@@ -148,4 +148,24 @@ public class LoginPageController {
         }
     }
 
+    public void setEmpIDField(TextField empIDField){
+        this.empIDField = empIDField;
+    }
+    public void setPasswordField(TextField passwordField){
+        this.passwordField = passwordField;
+    }
+    public void setEmailField(TextField emailField){
+        this.emailField = emailField;
+    }
+
+    public TextField getEmpIDField(){
+        return empIDField;
+    }
+    public TextField getPasswordField(){
+        return passwordField;
+    }
+    public TextField getEmailField(){
+        return emailField;
+    }
+
 }
