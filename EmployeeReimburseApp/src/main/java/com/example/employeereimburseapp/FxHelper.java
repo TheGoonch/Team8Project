@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 
 
 public class FxHelper {
@@ -22,6 +23,17 @@ public class FxHelper {
     public static void closeScene(ActionEvent event) throws IOException{
         Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         currentStage.close();
+    }
+
+    public static void nextPage(String fxmlFile, ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(FxHelper.class.getResource(fxmlFile));
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e) {
+            System.out.println("Navigation Error: " + e.getMessage());
+        }
     }
 
 }
