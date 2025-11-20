@@ -23,6 +23,17 @@ public class ManagerDashController extends Dashboard{
 
     private int filterId;
 
+    @FXML
+    public void initialize() {
+        super.initialize();
+
+        reqListVB.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.setUserData(this);
+            }
+        });
+    }
+
     @Override
     public void addReqCard(int reqId, String loc, double cost, String status) throws IOException {
         int userId = 0;
@@ -45,6 +56,8 @@ public class ManagerDashController extends Dashboard{
 
     @Override
     public void loadAllRequests(){
+        reqListVB.getChildren().clear();
+
         try(Connection con = CentralDatabase.getConnection()){
             PreparedStatement ps = con.prepareStatement("SELECT * FROM \"Request\" WHERE \"status\" = ?");
             ps.setString(1, "Pending");
@@ -74,6 +87,8 @@ public class ManagerDashController extends Dashboard{
     public void refreshList(ActionEvent event) {
     }
 
-
+    public void reloadRequests() {
+        loadAllRequests();
+    }
 
 }
