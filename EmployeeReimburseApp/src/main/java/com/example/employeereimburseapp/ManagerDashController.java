@@ -100,14 +100,13 @@ public class ManagerDashController extends Dashboard{
     @FXML
     public void clearFilter(ActionEvent event){
         userIdField.clear();
+        reloadList();
+    }
+
+    public void reloadList(){
         reqListVB.getChildren().clear();
         loadAllRequests();
     }
 
-    @FXML
-    public void refreshList(ActionEvent event){
-        reqListVB.getChildren().clear();
-        loadAllRequests();
-    }
 
 }

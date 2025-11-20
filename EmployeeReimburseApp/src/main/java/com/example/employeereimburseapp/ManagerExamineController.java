@@ -9,7 +9,7 @@ import java.sql.*;
 
 public class ManagerExamineController {
 
-    public static int selectedRequestId;
+    public static CardManager reqCard;
 
     @FXML private Label reqIdLabel;
     @FXML private Label userIdLabel;
@@ -29,7 +29,7 @@ public class ManagerExamineController {
 
     @FXML
     public void initialize() {
-        requestId = selectedRequestId;
+        requestId = reqCard.getRequestID();
         loadRequestInfo();
     }
 
@@ -74,10 +74,7 @@ public class ManagerExamineController {
             int updated = ps.executeUpdate();
 
             if (updated > 0) {
-                if (dashboardController != null) {
-                    dashboardController.reloadRequests();
-                }
-
+                reqCard.removeScene();
                 Stage stage = (Stage) reqIdLabel.getScene().getWindow();
                 stage.close();
             }

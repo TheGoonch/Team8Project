@@ -21,7 +21,7 @@ public class CardManager extends RequestCard {
 
     @FXML
     public void examineReq() throws IOException {
-        ManagerExamineController.selectedRequestId = getRequestID();
+        ManagerExamineController.reqCard = this;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("managerExamine-page.fxml"));
         Node root = loader.load();
