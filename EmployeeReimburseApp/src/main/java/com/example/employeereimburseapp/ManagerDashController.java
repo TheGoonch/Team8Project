@@ -23,17 +23,6 @@ public class ManagerDashController extends Dashboard{
 
     private int filterId;
 
-    @FXML
-    public void initialize() {
-        super.initialize();
-
-        reqListVB.sceneProperty().addListener((obs, oldScene, newScene) -> {
-            if (newScene != null) {
-                newScene.setUserData(this);
-            }
-        });
-    }
-
     @Override
     public void addReqCard(int reqId, String loc, double cost, String status) throws IOException {
         int userId = 0;
@@ -56,8 +45,6 @@ public class ManagerDashController extends Dashboard{
 
     @Override
     public void loadAllRequests(){
-        reqListVB.getChildren().clear();
-
         try(Connection con = CentralDatabase.getConnection()){
             PreparedStatement ps = con.prepareStatement("SELECT * FROM \"Request\" WHERE \"status\" = ?");
             ps.setString(1, "Pending");
@@ -78,16 +65,48 @@ public class ManagerDashController extends Dashboard{
     }
 
     @FXML
-    public void filterList(ActionEvent event) {
-    }
-    @FXML
-    public void clearFilter(ActionEvent event) {
-    }
-    @FXML
-    public void refreshList(ActionEvent event) {
+    public void filterList(ActionEvent event){
+        String text = userIdField.getText().trim();
+        if(text.isEmpty()){
+            return;
+        }
+        int userId;
+        try{
+            userId = Integer.parseInt(text);
+        }catch(NumberFormatException e){ //so only valid ids are used might not be needed
+            System.out.println("Invalid user ID entered.");
+            return;
+        }
+        reqListVB.getChildren().clear();
+        try(Connection con = CentralDatabase.getConnection()){
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM \"Request\" WHERE \"status\" = ? AND \"user_id\" = ?");
+            ps.setString(1, "Pending");
+            ps.setInt(2, userId);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                int reqId = rs.getInt("req_id");
+                String loc = rs.getString("location");
+                double cost = rs.getDouble("cost");
+                String status = rs.getString("status");
+                addReqCard(reqId, loc, cost, status);
+            }
+
+        }catch(Exception e){
+            System.out.println("Filter error: " + e.getMessage());
+        }
     }
 
-    public void reloadRequests() {
+    @FXML
+    public void clearFilter(ActionEvent event){
+        userIdField.clear();
+        reqListVB.getChildren().clear();
+        loadAllRequests();
+    }
+
+    @FXML
+    public void refreshList(ActionEvent event){
+        reqListVB.getChildren().clear();
         loadAllRequests();
     }
 
