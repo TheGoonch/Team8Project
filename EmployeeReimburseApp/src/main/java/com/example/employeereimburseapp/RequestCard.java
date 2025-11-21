@@ -32,6 +32,7 @@ public class RequestCard {
     public int getRequestID(){
         return Integer.parseInt(reqLbl.getText());
     }
+    public String getLocation(){ return locLbl.getText();}
 
     public void removeScene(){
         Pane parent = (Pane) root.getParent();

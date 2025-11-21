@@ -73,6 +73,8 @@ public class EmployeeDashController extends Dashboard{
 
         }catch(SQLException | IOException e){
             System.out.println("employeeDashController Error\n" + e.getMessage());
+        }catch(NumberFormatException e){
+            System.out.println("NumberFormatException\n" + e.getMessage());
         }
     }
 
@@ -81,7 +83,44 @@ public class EmployeeDashController extends Dashboard{
         Node card = loader.load();
         CardEmployee controller = loader.getController();
         controller.setData(reqId, loc, cost, status);
+        card.getProperties().put("controller", controller);
         reqListVB.getChildren().add(card);
     }
 
+    public void setLocField(TextField locField) {
+        this.locField = locField;
+    }
+    public void setExpenseField(TextField expenseField) {
+        this.expenseField = expenseField;
+    }
+    public void setCostField(TextField costField) {
+        this.costField = costField;
+    }
+    public void setReasonField(TextField reasonField) {
+        this.reasonField = reasonField;
+    }
+    public void setRecieptField(TextField recieptField) {
+        this.recieptField = recieptField;
+    }
+    public void setReqListVB(VBox reqListVB) {
+        this.reqListVB = reqListVB;
+    }
+    public TextField getLocField() {
+        return locField;
+    }
+    public TextField getExpenseField() {
+        return expenseField;
+    }
+    public TextField getCostField() {
+        return costField;
+    }
+    public TextField getReasonField() {
+        return reasonField;
+    }
+    public TextField getRecieptField() {
+        return recieptField;
+    }
+    public VBox getReqListVB() {
+        return reqListVB;
+    }
 }

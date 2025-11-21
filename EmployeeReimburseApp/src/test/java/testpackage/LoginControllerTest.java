@@ -25,8 +25,10 @@ public class LoginControllerTest {
     @BeforeAll
     static void initJavaFx() throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(1);
-        Platform.startup(latch::countDown);
-        latch.await(5, TimeUnit.SECONDS);
+        try {
+            Platform.startup(latch::countDown);
+            latch.await(5, TimeUnit.SECONDS);
+        }catch (IllegalStateException e){}
     }
 
     @BeforeEach
