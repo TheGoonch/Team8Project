@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeereimburseapp.HelloController">
+   <center>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="The Employee Reimbursement System is a desktop application designed to simplify and digitize the reimbursement process for UNB staff. Instead of using paper forms, employees can now submit trip-related expenses directly through the app, while managers can review, approve, or reject these requests in one central place." wrappingWidth="400.0" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#takeToLogInPage" prefHeight="54.0" prefWidth="97.0" text="Log In Page" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="50.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
+   <top>
+      <Label text="About the EMPLOYEE REIMBURESEMENT APP" textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+   </top>
+</BorderPane>

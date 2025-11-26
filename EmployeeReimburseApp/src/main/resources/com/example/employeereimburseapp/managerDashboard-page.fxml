@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane prefHeight="425.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeereimburseapp.ManagerDashController">
+
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" prefWidth="134.0" />
+        <ColumnConstraints hgrow="SOMETIMES" prefWidth="564.0" />
+    </columnConstraints>
+
+    <rowConstraints>
+        <RowConstraints prefHeight="23.6" vgrow="SOMETIMES" />
+        <RowConstraints prefHeight="377.2" vgrow="SOMETIMES" />
+    </rowConstraints>
+
+    <children>
+        <!-- LEFT SIDE (Manager Controls) -->
+        <GridPane GridPane.rowIndex="1">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+
+            <children>
+                <!-- Approve / Reject Buttons -->
+                <VBox prefHeight="200.0" prefWidth="100.0">
+                    <children>
+                        <Button fx:id="approveBtn" prefHeight="40.0" prefWidth="122.0" text="Approve Request" />
+                        <Button fx:id="rejectBtn" prefHeight="40.0" prefWidth="122.0" text="Reject Request" />
+                  <Button fx:id="refreshBtn1" prefHeight="35.0" prefWidth="123.0" text="Examine" />
+                    </children>
+                    <GridPane.margin>
+                        <Insets left="10.0" top="10.0" />
+                    </GridPane.margin>
+                </VBox>
+
+                <!-- Buttons for filter and refresh -->
+                <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                    <children>
+                        <Button fx:id="filterBtn" prefHeight="35.0" prefWidth="122.0" text="Apply Filter" />
+                        <Button fx:id="refreshBtn" prefHeight="35.0" prefWidth="122.0" text="Refresh List" />
+                    </children>
+                    <GridPane.margin>
+                        <Insets left="10.0" top="5.0" />
+                    </GridPane.margin>
+                </VBox>
+
+                <!-- View Receipt -->
+                <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="2">
+                    <children>
+                        <Button fx:id="viewReceiptBtn" prefHeight="35.0" prefWidth="122.0" text="View Receipt" />
+                    </children>
+                    <GridPane.margin>
+                        <Insets left="10.0" top="5.0" />
+                    </GridPane.margin>
+                </VBox>
+            </children>
+        </GridPane>
+
+        <!-- RIGHT SIDE (Request List) -->
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <content>
+                <VBox fx:id="requestList" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                    <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+
+        <!-- HEADER -->
+        <GridPane prefHeight="36.0" prefWidth="562.0" GridPane.columnIndex="1">
+            <columnConstraints>
+                <ColumnConstraints prefWidth="80.0" />
+                <ColumnConstraints prefWidth="100.0" />
+                <ColumnConstraints prefWidth="100.0" />
+                <ColumnConstraints prefWidth="80.0" />
+                <ColumnConstraints prefWidth="100.0" />
+                <ColumnConstraints prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label text="Request ID" />
+                <Label text="Employee" GridPane.columnIndex="1" />
+                <Label text="Location" GridPane.columnIndex="2" />
+                <Label text="Cost" GridPane.columnIndex="3" />
+                <Label text="Reason" GridPane.columnIndex="4" />
+                <Label text="Status" GridPane.columnIndex="5" />
+            </children>
+        </GridPane>
+
+        <!-- Dashboard Title -->
+        <Label fx:id="welcomeLbl" text="Manager Dashboard" />
+    </children>
+</GridPane>

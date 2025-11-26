@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.employeereimburseapp.ManagerExamineController">
+
+    <children>
+
+        <Label text="Request Details" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+
+        <GridPane hgap="10" vgap="8">
+            <children>
+                <Label text="Employee:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+                <Label fx:id="employeeLabel" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+
+                <Label text="Amount:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+                <Label fx:id="amountLabel" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+
+                <Label text="Description:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+                <Label fx:id="descriptionLabel" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+            </children>
+        </GridPane>
+
+        <HBox spacing="10">
+            <children>
+                <Button text="Approve" fx:id="approveBtn" onAction="#approve" />
+                <Button text="Reject" fx:id="rejectBtn" onAction="#reject" />
+            </children>
+        </HBox>
+
+    </children>
+
+    <padding>
+        <Insets top="20" bottom="20" left="20" right="20"/>
+    </padding>
+
+</VBox>

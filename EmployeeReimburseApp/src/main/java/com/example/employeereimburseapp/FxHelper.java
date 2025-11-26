@@ -1,0 +1,28 @@
+package com.example.employeereimburseapp;
+
+import javafx.event.ActionEvent;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.Node;
+
+
+public class FxHelper {
+
+    public static void nextPage(String sceneName, ActionEvent event) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(FxHelper.class.getResource(sceneName));
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage newStage = new Stage();
+        newStage.setTitle("Login Window");
+        newStage.setScene(scene);
+        newStage.show();
+        closeScene(event);
+    }
+
+    public static void closeScene(ActionEvent event) throws IOException{
+        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        currentStage.close();
+    }
+
+}
