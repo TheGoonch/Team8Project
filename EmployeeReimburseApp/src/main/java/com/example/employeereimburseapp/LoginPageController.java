@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 import java.sql.*;
 import java.sql.SQLException;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class LoginPageController {
@@ -23,39 +24,51 @@ public class LoginPageController {
         try(Connection con = CentralDatabase.getConnection()){
             ResultSet rs;
             PreparedStatement ps;
-            ps = con.prepareStatement("SELECT 1 FROM \"UNBEmployee\" WHERE \"emp_id\" = ?");
+            ps = con.prepareStatement("SELECT * FROM \"UNBEmployee\" WHERE \"emp_id\" = ?");
             ps.setInt(1, Integer.parseInt(empIDField.getText()));
             rs = ps.executeQuery();
             if(!rs.next()){
-                System.out.println("Invalid Id");
+                System.out.println("No such user in UNB database exists");
                 return;
             }
+
+            int idDat = rs.getInt("emp_id");
+            String email = rs.getString("email");
+            String password = rs.getString("password");
+            String role = rs.getString("role");
 
             ps = con.prepareStatement("SELECT 1 FROM \"User\" WHERE \"user_id\" = ?");
             ps.setInt(1, Integer.parseInt(empIDField.getText()));
             rs = ps.executeQuery();
             if(rs.next()){
-                ps = con.prepareStatement("SELECT 1 FROM \"User\" WHERE \"email\" = ?");
-                ps.setString(1, emailField.getText());
-                rs = ps.executeQuery();
-                if(!rs.next()){
+
+                if(!email.equals(emailField.getText())){
                     System.out.println("Invalid Email");
                     return;
                 }
-                ps = con.prepareStatement("SELECT 1 FROM \"User\" WHERE \"password\" = ?");
-                ps.setString(1, passwordField.getText());
-                rs = ps.executeQuery();
-                if(rs.next()){
+
+                if(password.equals(passwordField.getText())){
                     createSession(con);
                     UserSession user = UserSession.getUser();
-                    if(user != null){
+                    if(user == null){
                         System.out.println("Session Creation Failed");
                         FxHelper.closeScene(event);
+                    }else{
+
+                        if(role.equals("employee")){
+                            FxHelper.nextPage("employeeDashboard-page.fxml");
+                            FxHelper.closeScene(event);
+                        }else if(role.equals("manager")){
+                            FxHelper.nextPage("managerDashboard-page.fxml");
+                            FxHelper.closeScene(event);
+                        }
+
                     }
-                    FxHelper.nextPage("employeeDashboard-page.fxml",event);
+
                 }else{
                     System.out.println("Invalid Password");
                 }
+
             }else {
                 int rows = createNewUser(con);
                 if(rows < 0){
@@ -64,11 +77,21 @@ public class LoginPageController {
                     System.out.println("Account Creation Success");
                     createSession(con);
                     UserSession user = UserSession.getUser();
-                    if(user != null){
+                    if(user == null){
                         System.out.println("Session Creation Failed");
                         FxHelper.closeScene(event);
+                    }else{
+
+                        if(role.equals("employee")){
+                            FxHelper.nextPage("employeeDashboard-page.fxml");
+                            FxHelper.closeScene(event);
+                        }else if(role.equals("manager")){
+                            FxHelper.nextPage("managerDashboard-page.fxml");
+                            FxHelper.closeScene(event);
+                        }
+
                     }
-                    FxHelper.nextPage("employeeDashboard-page.fxml",event);
+
                 }
 
             }
@@ -123,6 +146,26 @@ public class LoginPageController {
         }catch(SQLException e){
             System.out.println("LoginPageController Error\n" + e.getMessage());
         }
+    }
+
+    public void setEmpIDField(TextField empIDField){
+        this.empIDField = empIDField;
+    }
+    public void setPasswordField(TextField passwordField){
+        this.passwordField = passwordField;
+    }
+    public void setEmailField(TextField emailField){
+        this.emailField = emailField;
+    }
+
+    public TextField getEmpIDField(){
+        return empIDField;
+    }
+    public TextField getPasswordField(){
+        return passwordField;
+    }
+    public TextField getEmailField(){
+        return emailField;
     }
 
 }

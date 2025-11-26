@@ -1,40 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox spacing="15" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.employeereimburseapp.ManagerExamineController">
+<VBox alignment="TOP_LEFT" prefHeight="394.0" prefWidth="307.0" spacing="15" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeereimburseapp.ManagerExamineController">
 
     <children>
 
-        <Label text="Request Details" style="-fx-font-size: 20px; -fx-font-weight: bold;" />
+        <Label alignment="TOP_CENTER" prefHeight="25.0" prefWidth="267.0" style="-fx-font-size: 25px; -fx-font-weight: bold;" text="Request  Details" />
 
-        <GridPane hgap="10" vgap="8">
+        <GridPane hgap="10" prefHeight="256.0" prefWidth="267.0" vgap="20">
             <children>
-                <Label text="Employee:" GridPane.rowIndex="0" GridPane.columnIndex="0" />
-                <Label fx:id="employeeLabel" GridPane.rowIndex="0" GridPane.columnIndex="1" />
 
-                <Label text="Amount:" GridPane.rowIndex="1" GridPane.columnIndex="0" />
-                <Label fx:id="amountLabel" GridPane.rowIndex="1" GridPane.columnIndex="1" />
+                <Label text="Request ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="reqIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                <Label text="Description:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
-                <Label fx:id="descriptionLabel" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+                <Label text="User ID:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label fx:id="userIdLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Location:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <Label fx:id="locationLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Expense Type:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label fx:id="expenseTypeLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                <Label text="Cost:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <Label fx:id="costLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                <Label text="Reason:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <Label fx:id="reasonLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                <Label text="Receipt URL:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                <Label fx:id="receiptUrlLabel" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
             </children>
+         <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+         </rowConstraints>
         </GridPane>
 
-        <HBox spacing="10">
+        <HBox prefHeight="35.0" prefWidth="267.0" spacing="10">
             <children>
-                <Button text="Approve" fx:id="approveBtn" onAction="#approve" />
-                <Button text="Reject" fx:id="rejectBtn" onAction="#reject" />
+                <Button fx:id="approveBtn" onAction="#approve" prefHeight="25.0" prefWidth="125.0" text="Approve" />
+                <Button fx:id="rejectBtn" onAction="#reject" prefHeight="25.0" prefWidth="125.0" text="Reject" />
             </children>
         </HBox>
 
     </children>
 
     <padding>
-        <Insets top="20" bottom="20" left="20" right="20"/>
+        <Insets bottom="20" left="20" right="20" top="20" />
     </padding>
 
 </VBox>

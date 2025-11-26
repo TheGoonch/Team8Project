@@ -10,14 +10,13 @@ import javafx.scene.Node;
 
 public class FxHelper {
 
-    public static void nextPage(String sceneName, ActionEvent event) throws IOException{
+    public static void nextPage(String sceneName) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(FxHelper.class.getResource(sceneName));
         Scene scene = new Scene(fxmlLoader.load());
         Stage newStage = new Stage();
-        newStage.setTitle("Login Window");
+        newStage.setTitle("Employee Reimburse App");
         newStage.setScene(scene);
         newStage.show();
-        closeScene(event);
     }
 
     public static void closeScene(ActionEvent event) throws IOException{

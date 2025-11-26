@@ -8,6 +8,7 @@ public class HelloController {
 
     @FXML
     protected void takeToLogInPage(ActionEvent event) throws IOException {
-        FxHelper.nextPage("login-page.fxml", event);
+        FxHelper.nextPage("login-page.fxml");
+        FxHelper.closeScene(event);
     }
 }

@@ -4,6 +4,7 @@ module com.example.employeereimburseapp {
     requires java.sql;
     requires javafx.graphics;
     requires jdk.jfr;
+    requires jdk.httpserver;
 
 
     opens com.example.employeereimburseapp to javafx.fxml;
