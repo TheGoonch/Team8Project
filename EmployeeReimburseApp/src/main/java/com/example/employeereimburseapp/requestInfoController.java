@@ -101,7 +101,7 @@ public class requestInfoController {
                 ResultSet rs;
                 PreparedStatement ps;
                 ps = con.prepareStatement("UPDATE \"Request\" SET \"cost\" = ? WHERE \"req_id\" = ?" );
-                ps.setInt(1,Integer.parseInt(costField.getText()));
+                ps.setDouble(1,Double.parseDouble(costField.getText()));
                 ps.setInt(2, Integer.parseInt(requestField.getText()));
                 ps.executeUpdate();
             }

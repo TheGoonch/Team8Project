@@ -50,5 +50,13 @@ public abstract class Dashboard {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+    }
+
+    @FXML
+    public void goBackToLogin(ActionEvent event) throws IOException{
+        UserSession.destroyUser();
+        FxHelper.nextPage("Login-page.fxml");
+        FxHelper.closeScene(event);
     }
 }

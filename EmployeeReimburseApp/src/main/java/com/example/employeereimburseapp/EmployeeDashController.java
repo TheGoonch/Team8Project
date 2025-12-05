@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import java.sql.Connection;
 
@@ -87,6 +88,41 @@ public class EmployeeDashController extends Dashboard{
         reqListVB.getChildren().add(card);
     }
 
+    private void makeVisible(String status){
+        for(Node node : reqListVB.getChildren()){
+            Object obj = node.getProperties().get("controller");
+            if(obj instanceof RequestCard controller){
+                boolean visible = controller.getStatus().equalsIgnoreCase(status);
+                node.setVisible(visible);
+                node.setManaged(visible);
+            }
+        }
+    }
+
+    @FXML
+    public void showPending(){
+        makeVisible("Pending");
+    }
+
+    @FXML
+    public void showAccepted(){
+        makeVisible("Accepted");
+    }
+
+    @FXML
+    public void showRejected(){
+        makeVisible("Rejected");
+    }
+
+    @FXML
+    public void showAll(){
+        for(Node node : reqListVB.getChildren()){
+            node.setVisible(true);
+            node.setManaged(true);
+        }
+    }
+
+    //ForUnitTesting
     public void setLocField(TextField locField) {
         this.locField = locField;
     }
