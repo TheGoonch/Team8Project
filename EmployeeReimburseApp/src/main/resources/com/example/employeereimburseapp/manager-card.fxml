@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeereimburseapp.CardManager">
+<AnchorPane fx:id="root" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeereimburseapp.CardManager">
    <children>
-      <GridPane prefHeight="30.0" prefWidth="642.0">
+      <GridPane prefHeight="30.0" prefWidth="642.0" styleClass="gridpane-cards">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" />
           <ColumnConstraints hgrow="SOMETIMES" />
@@ -26,7 +26,7 @@
             <Label fx:id="locLbl" text="Location" GridPane.columnIndex="2" />
             <Label fx:id="costLbl" text="Cost" GridPane.columnIndex="3" />
             <Label fx:id="statusLbl" text="Status" GridPane.columnIndex="4" />
-            <Button mnemonicParsing="false" onAction="#examineReq" prefHeight="26.0" prefWidth="80.0" text="Examine" GridPane.columnIndex="5" />
+            <Button mnemonicParsing="false" onAction="#examineReq" prefHeight="26.0" prefWidth="80.0" styleClass="button-square-small" text="Examine" GridPane.columnIndex="5" />
             <Label fx:id="userIdLbl" text="EmployeeID" />
          </children>
       </GridPane>

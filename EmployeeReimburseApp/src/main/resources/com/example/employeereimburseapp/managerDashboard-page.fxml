@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<GridPane prefHeight="425.0" prefWidth="772.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeereimburseapp.ManagerDashController">
+<GridPane prefHeight="454.0" prefWidth="787.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeereimburseapp.ManagerDashController">
 
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" prefWidth="134.0" />
@@ -18,8 +18,9 @@
     </columnConstraints>
 
     <rowConstraints>
-        <RowConstraints prefHeight="23.6" vgrow="SOMETIMES" />
-        <RowConstraints prefHeight="377.2" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="33.600006103515625" minHeight="28.800003051757812" prefHeight="33.600006103515625" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="404.8" minHeight="229.59998779296876" prefHeight="375.1999938964844" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="200.80001220703127" minHeight="10.0" prefHeight="44.60001220703123" vgrow="SOMETIMES" />
     </rowConstraints>
 
     <children>
@@ -40,16 +41,23 @@
                         <Insets left="10.0" top="10.0" />
                     </GridPane.margin>
                <children>
-                        <Button fx:id="filterBtn" onAction="#filterList" prefHeight="35.0" prefWidth="122.0" text="Apply Filter" />
-                  <Label text="UserID" />
-                  <TextField fx:id="userIdField">
+                  <Label text="UserID">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <TextField fx:id="userIdField" styleClass="pill-textfield">
                      <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" />
                      </padding>
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" />
                      </VBox.margin></TextField>
-                  <Button onAction="#clearFilter" prefHeight="35.0" prefWidth="122.0" text="Clear Filter" />
+                        <Button fx:id="filterBtn" onAction="#filterList" prefHeight="35.0" prefWidth="122.0" styleClass="button-small" text="Apply Filter" />
+                  <Button onAction="#clearFilter" prefHeight="35.0" prefWidth="122.0" styleClass="button-small" text="Clear Filter" />
                </children>
                 </VBox>
 
@@ -58,19 +66,16 @@
                     <GridPane.margin>
                         <Insets left="10.0" top="5.0" />
                     </GridPane.margin>
-               <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBackToLogin" text="Back to Login" />
-               </children>
                 </VBox>
             </children>
         </GridPane>
 
         <!-- RIGHT SIDE (Request List) -->
-        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="380.0" prefWidth="643.0" styleClass="vbox" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <content>
-                <VBox fx:id="reqListVB" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                <VBox fx:id="reqListVB" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0">
                     <padding>
-                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                        <Insets bottom="12.0" right="12.0" top="12.0" />
                     </padding>
                 </VBox>
             </content>
@@ -100,6 +105,7 @@
         </GridPane>
 
         <!-- Dashboard Title -->
-        <Label fx:id="welcomeLbl" text="Manager Dashboard" />
+        <Label fx:id="welcomeLbl" prefHeight="18.0" prefWidth="167.0" styleClass="header-small" text="Manager Dashboard" />
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#goBackToLogin" prefHeight="30.0" prefWidth="130.0" styleClass="button-small" text="Back to Login" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     </children>
 </GridPane>

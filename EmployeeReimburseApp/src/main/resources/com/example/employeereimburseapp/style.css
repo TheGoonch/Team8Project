@@ -29,26 +29,60 @@
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 12, 0.2, 0, 2);
     -fx-cursor: hand;
 }
+
+.button-small{
+    -fx-background-color: #5F80FF;
+    -fx-text-fill: white;
+    -fx-font-family: "Inter";
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-padding: 4 20 4 20;
+    -fx-background-radius: 1000px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 12, 0.2, 0, 2);
+    -fx-cursor: hand;
+}
+
+.menu-bar .label{
+    -fx-text-fill: white;
+}
 .vbox {
-    -fx-background-color: #FFFFFF;            /* pure white card */
-    -fx-background-radius: 12;                /* smooth rounded corners */
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 12;
     -fx-padding: 16;
 
-    -fx-effect: dropshadow(
-            gaussian,
-            rgba(0, 0, 0, 0.18),   /* soft grey/black shadow */
-            16,                   /* radius / blur */
-            0.15,                 /* spread */
-            0, 4                  /* offset X, offset Y */
-    );
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 16, 0.15, 0, 4);
 }
 
 .pill-textfield {
-    -fx-background-color: #e5e5e5;   /* light grey */
-    -fx-background-radius: 30;       /* big radius = pill */
+    -fx-background-color: #e5e5e5;
+    -fx-background-radius: 30;
     -fx-border-radius: 30;
-    -fx-padding: 6 14 6 14;          /* vertical + horizontal padding */
-    -fx-text-fill: #333;             /* darker text */
+    -fx-padding: 6 14 6 14;
+    -fx-text-fill: rgba(51, 51, 51, 0.95);
     -fx-font-size: 14px;
 }
 
+.header-small {
+    -fx-font-size: 18px;
+}
+
+.button-square-small {
+    -fx-background-color: #7389ff;
+    -fx-text-fill: white;
+    -fx-font-family: "Inter";
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-padding: 4 10;
+    -fx-background-radius: 6;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.18), 8, 0.2, 0, 2);
+    -fx-cursor: hand;
+}
+
+.gridpane-cards {
+    -fx-background-color: #c2d3ff;
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+    -fx-border-color: rgba(0,0,0,0.08);
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+}
