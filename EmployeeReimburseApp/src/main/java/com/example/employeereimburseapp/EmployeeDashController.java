@@ -106,7 +106,7 @@ public class EmployeeDashController extends Dashboard{
 
     @FXML
     public void showAccepted(){
-        makeVisible("Accepted");
+        makeVisible("Approved");
     }
 
     @FXML

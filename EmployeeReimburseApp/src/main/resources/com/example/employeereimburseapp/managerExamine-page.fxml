@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_LEFT" prefHeight="394.0" prefWidth="307.0" spacing="15" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeereimburseapp.ManagerExamineController">
+<VBox alignment="TOP_CENTER" prefHeight="437.0" prefWidth="473.0" spacing="15" stylesheets="@style.css" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.employeereimburseapp.ManagerExamineController">
 
     <children>
 
-        <Label alignment="TOP_CENTER" prefHeight="25.0" prefWidth="267.0" style="-fx-font-size: 25px; -fx-font-weight: bold;" text="Request  Details" />
+        <Label alignment="TOP_CENTER" prefHeight="25.0" prefWidth="267.0" style="-fx-font-size: 25px; -fx-font-weight: bold;" styleClass="headerBold" text="Request  Details" />
 
-        <GridPane hgap="10" prefHeight="256.0" prefWidth="267.0" vgap="20">
+        <GridPane hgap="10" prefHeight="256.0" prefWidth="267.0" styleClass="vbox" vgap="20">
             <children>
 
                 <Label text="Request ID:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
@@ -50,10 +55,10 @@
          </rowConstraints>
         </GridPane>
 
-        <HBox prefHeight="35.0" prefWidth="267.0" spacing="10">
+        <HBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="434.0" spacing="10">
             <children>
-                <Button fx:id="approveBtn" onAction="#approve" prefHeight="25.0" prefWidth="125.0" text="Approve" />
-                <Button fx:id="rejectBtn" onAction="#reject" prefHeight="25.0" prefWidth="125.0" text="Reject" />
+                <Button fx:id="approveBtn" onAction="#approve" prefHeight="25.0" prefWidth="125.0" styleClass="button-green" text="Approve" />
+                <Button fx:id="rejectBtn" onAction="#reject" prefHeight="25.0" prefWidth="125.0" styleClass="button-red" text="Reject" />
             </children>
         </HBox>
 
